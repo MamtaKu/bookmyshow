@@ -1,8 +1,8 @@
 package com.bookmyshow.bookmyshow.models;
 
 public enum Feature {
-    TWOD,
-    THREED,
+    TWO_D,
+    THREE_D,
     IMAX,
     HD
 }

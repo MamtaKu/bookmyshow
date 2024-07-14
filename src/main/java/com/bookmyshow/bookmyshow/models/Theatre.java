@@ -1,5 +1,6 @@
 package com.bookmyshow.bookmyshow.models;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -12,11 +13,15 @@ import java.util.List;
 @Setter
 @Entity
 public class Theatre extends Basemodel {
+    @Column(unique = true)
     private String name;
 
-    @ManyToOne
-    private City city;
+//    @ManyToOne
+//    private City city;
 
     @OneToMany
     private List<Screen> screens;
 }
+
+
+

@@ -16,11 +16,11 @@ public class Basemodel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @CreatedDate
-    @Temporal(value = TemporalType.TIMESTAMP)
-    private Date createdAt;
-
-    @LastModifiedBy
-    @Temporal(value = TemporalType.TIMESTAMP)
-    private Date updatedAt;
+//    @CreatedDate
+//    @Temporal(value = TemporalType.TIMESTAMP)
+//    private Date createdAt;
+//
+//    @LastModifiedBy
+//    @Temporal(value = TemporalType.TIMESTAMP)
+//    private Date updatedAt;
 }

@@ -4,9 +4,10 @@ import jakarta.persistence.Entity;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
-@Entity
-public class SeatType extends Basemodel {
-    private String name;
+
+public enum SeatType {
+    GOLD,
+    SILVER,
+    PLATINUM,
+    RECLINER
 }

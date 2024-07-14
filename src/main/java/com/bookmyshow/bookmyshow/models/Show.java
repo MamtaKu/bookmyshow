@@ -9,7 +9,7 @@ import java.util.List;
 
 @Getter
 @Setter
-@Entity
+@Entity(name ="shows")
 public class Show extends Basemodel {
 
     @ManyToOne
@@ -18,8 +18,8 @@ public class Show extends Basemodel {
     private Date startTime;
     private Date endTime;
 
-    @OneToMany
-    private List<ShowSeat> showSeats;
+//    @OneToMany
+//    private List<ShowSeat> showSeats;
 
     @ManyToOne
     private Screen screen;
