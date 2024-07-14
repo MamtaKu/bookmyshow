@@ -1,9 +1,7 @@
 package com.bookmyshow.bookmyshow.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,6 +15,8 @@ public class Theatre extends Basemodel {
     private String name;
 
     @ManyToOne
+    @JoinColumn(name = "city_id")
+    @JsonBackReference
     private City city;
 
     @OneToMany(mappedBy = "theatre")
