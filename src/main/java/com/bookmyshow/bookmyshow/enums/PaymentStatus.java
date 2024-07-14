@@ -1,4 +1,4 @@
-package com.bookmyshow.bookmyshow.models;
+package com.bookmyshow.bookmyshow.enums;
 
 public enum PaymentStatus {
     SUCCESSFUL,

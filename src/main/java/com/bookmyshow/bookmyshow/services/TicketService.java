@@ -1,6 +1,5 @@
 package com.bookmyshow.bookmyshow.services;
 
-import com.bookmyshow.bookmyshow.models.ShowSeat;
 import com.bookmyshow.bookmyshow.models.Ticket;
 
 import java.util.List;

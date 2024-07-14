@@ -1,5 +1,6 @@
 package com.bookmyshow.bookmyshow.models;
 
+import com.bookmyshow.bookmyshow.enums.FeatureEnum;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,5 +27,5 @@ public class Show extends Basemodel {
 
     @Enumerated(EnumType.ORDINAL)
     @ElementCollection
-    private List<Feature> features;
+    private List<FeatureEnum> featureEnums;
 }

@@ -1,6 +1,6 @@
 package com.bookmyshow.bookmyshow.dtos;
 
-import com.bookmyshow.bookmyshow.models.BookingStatus;
+import com.bookmyshow.bookmyshow.enums.BookingStatus;
 import lombok.Getter;
 import lombok.Setter;
 

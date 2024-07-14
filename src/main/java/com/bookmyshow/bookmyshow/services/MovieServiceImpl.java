@@ -22,7 +22,7 @@ public class MovieServiceImpl implements MovieService {
         movie.setId(optionalMovie.get().getId());
         movie.setName(optionalMovie.get().getName());
         movie.setDescription((optionalMovie.get().getDescription()));
-        movie.setFeatures(optionalMovie.get().getFeatures());
+        movie.setFeatureEnums(optionalMovie.get().getFeatureEnums());
         return movie;
 
     }

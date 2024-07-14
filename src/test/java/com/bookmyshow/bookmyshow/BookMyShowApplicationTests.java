@@ -5,7 +5,7 @@ import com.bookmyshow.bookmyshow.dtos.UserLoginRequestDTO;
 import com.bookmyshow.bookmyshow.dtos.UserLoginResponseDTO;
 import com.bookmyshow.bookmyshow.dtos.UserSignUpRequestDTO;
 import com.bookmyshow.bookmyshow.dtos.UserSignUpResponseDTO;
-import com.bookmyshow.bookmyshow.models.BookingStatus;
+import com.bookmyshow.bookmyshow.enums.BookingStatus;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

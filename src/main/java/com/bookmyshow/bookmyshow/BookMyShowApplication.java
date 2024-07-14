@@ -1,13 +1,16 @@
 package com.bookmyshow.bookmyshow;
 
+import com.bookmyshow.bookmyshow.enums.FeatureEnum;
+import com.bookmyshow.bookmyshow.enums.SeatType;
 import com.bookmyshow.bookmyshow.models.*;
 import com.bookmyshow.bookmyshow.repositories.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-
+import java.util.List;
 @SpringBootApplication
 public class BookMyShowApplication implements CommandLineRunner {
     private MovieRepository movieRepository;
@@ -113,19 +116,19 @@ public class BookMyShowApplication implements CommandLineRunner {
         Screen screen = new Screen();
         screen.setName("Audi 1");
         screen.setSeats(Arrays.asList(seat,seat2,seat3));
-        screen.setFeatures(Arrays.asList(Feature.IMAX,Feature.HD));
+        screen.setFeatures(Arrays.asList(FeatureEnum.IMAX, FeatureEnum.HD));
         screenRepository.save(screen);
 //
         Screen screen2 = new Screen();
         screen2.setName("Audi 2");
         screen2.setSeats(Arrays.asList(seat,seat2,seat3));
-        screen2.setFeatures(Arrays.asList(Feature.IMAX,Feature.HD));
+        screen2.setFeatures(Arrays.asList(FeatureEnum.IMAX, FeatureEnum.HD));
         screenRepository.save(screen2);
 
         Screen screen3 = new Screen();
         screen3.setName("Audi 3");
         screen3.setSeats(Arrays.asList(seat,seat2,seat3));
-        screen3.setFeatures(Arrays.asList(Feature.IMAX,Feature.HD));
+        screen3.setFeatures(Arrays.asList(FeatureEnum.IMAX, FeatureEnum.HD));
         screenRepository.save(screen3);
 //
 //        Theatre theatre1 = new Theatre();

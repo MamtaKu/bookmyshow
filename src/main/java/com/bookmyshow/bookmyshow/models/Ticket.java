@@ -1,12 +1,11 @@
 package com.bookmyshow.bookmyshow.models;
 
+import com.bookmyshow.bookmyshow.enums.BookingStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -22,13 +21,13 @@ public class Ticket extends Basemodel {
     private Show show;
 
     @OneToMany
-    private List<Payment> payments;
+    private List<City.Payment> payments;
 
     @ManyToOne
     private User user;
 
     @ManyToMany
-    private List<ShowSeat> showSeats;
+    private List<Movie.ShowSeat> showSeats;
     private LocalDateTime bookedAt;
     private double amount;
 

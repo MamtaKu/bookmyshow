@@ -1,9 +1,9 @@
 package com.bookmyshow.bookmyshow.models;
 
+import com.bookmyshow.bookmyshow.enums.SeatType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
 

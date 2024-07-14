@@ -1,5 +1,7 @@
 package com.bookmyshow.bookmyshow.models;
 
+import com.bookmyshow.bookmyshow.enums.FeatureEnum;
+import com.bookmyshow.bookmyshow.enums.ShowSeatStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,7 +18,23 @@ public class Movie extends Basemodel {
 
     @Enumerated(EnumType.ORDINAL)
     @ElementCollection
-    List<Feature> features;
+    List<FeatureEnum> featureEnums;
 
 
+    @Getter
+    @Setter
+    @Entity
+    public static class ShowSeat extends Basemodel {
+        @ManyToOne
+        private Show show;
+
+        @Enumerated(EnumType.ORDINAL)
+        private ShowSeatStatus showSeatStatus;
+
+        @ManyToOne
+        private Seat seat;
+        private double price;
+
+
+    }
 }

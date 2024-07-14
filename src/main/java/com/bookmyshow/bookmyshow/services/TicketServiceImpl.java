@@ -1,5 +1,7 @@
 package com.bookmyshow.bookmyshow.services;
 
+import com.bookmyshow.bookmyshow.enums.BookingStatus;
+import com.bookmyshow.bookmyshow.enums.ShowSeatStatus;
 import com.bookmyshow.bookmyshow.exceptions.ShowSeatNotAvaialbleException;
 import com.bookmyshow.bookmyshow.models.*;
 import com.bookmyshow.bookmyshow.repositories.ShowRepository;
@@ -12,7 +14,6 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +42,7 @@ public class TicketServiceImpl implements TicketService {
 
         for(Long showSeatId : showSeatIds){
             //Get the showseat
-            ShowSeat showSeat = showSeatRepository.findById(showSeatId).get();
+            Movie.ShowSeat showSeat = showSeatRepository.findById(showSeatId).get();
             //check the show seat availability
             if(showSeat.getShowSeatStatus().equals(ShowSeatStatus.AVAILABLE)){
                 //If yes, lock the seat
@@ -57,14 +58,14 @@ public class TicketServiceImpl implements TicketService {
 
 
         boolean paymentDone = calculatePrice();
-        List<ShowSeat> showSeats = new ArrayList<>();
+        List<Movie.ShowSeat> showSeats = new ArrayList<>();
 
         double amount = 0;
 
 
         if(paymentDone){
             for(Long showSeatId : showSeatIds){
-                ShowSeat showSeat = showSeatRepository.findById(showSeatId).get();
+                Movie.ShowSeat showSeat = showSeatRepository.findById(showSeatId).get();
                 showSeat.setShowSeatStatus(ShowSeatStatus.BOOKED);
                 showSeatRepository.save(showSeat);
                 showSeats.add(showSeat);
