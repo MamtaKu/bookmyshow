@@ -1,9 +1,6 @@
 package com.bookmyshow.bookmyshow.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,5 +14,6 @@ public class Seat extends Basemodel {
     @Enumerated(EnumType.ORDINAL)
     private SeatType seatType;
     @ManyToOne
+    @JoinColumn(name="screen_id")
     private Screen screen;
 }

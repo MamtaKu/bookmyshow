@@ -1,5 +1,6 @@
 package com.bookmyshow.bookmyshow.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,6 +18,10 @@ public class Movie extends Basemodel {
     @Enumerated(EnumType.ORDINAL)
     @ElementCollection
     List<Feature> features;
+
+    @OneToMany(mappedBy = "movie")
+    @JsonManagedReference
+    private List<Show> shows;
 
 
 }

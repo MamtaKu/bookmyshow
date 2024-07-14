@@ -1,5 +1,6 @@
 package com.bookmyshow.bookmyshow.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,5 +22,7 @@ public class Screen extends Basemodel {
 
 
     @ManyToOne
+    @JoinColumn(name = "theatre_id")
+    @JsonBackReference
     private Theatre theatre;
 }

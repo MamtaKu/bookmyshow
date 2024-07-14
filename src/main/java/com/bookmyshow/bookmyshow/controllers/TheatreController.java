@@ -19,8 +19,9 @@ public class TheatreController {
         this.theatreService = theatreService;
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public Theatre getTheaterById(@PathVariable("id") Long id){
+
         return theatreService.getTheatreById(id);
     }
 

@@ -4,6 +4,8 @@ import com.bookmyshow.bookmyshow.models.Movie;
 import com.bookmyshow.bookmyshow.repositories.MovieRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -23,7 +25,30 @@ public class MovieServiceImpl implements MovieService {
         movie.setName(optionalMovie.get().getName());
         movie.setDescription((optionalMovie.get().getDescription()));
         movie.setFeatures(optionalMovie.get().getFeatures());
+        movie.setShows(optionalMovie.get().getShows());
         return movie;
 
     }
+
+    @Override
+    public List<Movie> getAllMovie() {
+        List<Movie> movies = new ArrayList<>();
+        List<Movie> allMovies = movieRepository.findAll();
+        for(Movie movie : allMovies){
+            movies.add(convertToMovie(movie));
+        }
+        return movies;
+    }
+
+    private Movie convertToMovie(Movie movieObj) {
+        Movie movie = new Movie();
+        movie.setId(movieObj.getId());
+        movie.setName(movieObj.getName());
+        movie.setFeatures(movieObj.getFeatures());
+        movie.setDescription(movieObj.getDescription());
+        movie.setShows(movieObj.getShows());
+        return movie;
+    }
+
+
 }
