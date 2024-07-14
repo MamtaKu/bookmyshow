@@ -1,10 +1,12 @@
 package com.bookmyshow.bookmyshow.services;
 
 import com.bookmyshow.bookmyshow.models.City;
+import com.bookmyshow.bookmyshow.models.Theatre;
 import com.bookmyshow.bookmyshow.repositories.CityRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,7 +27,13 @@ public class CityServiceImp implements CityService {
         City optionalCity1 = byId.get();
         city.setId(optionalCity1.getId());
         city.setName(optionalCity1.getName());
-        city.setTheatres(optionalCity1.getTheatres());
+        List<Theatre> theatres = optionalCity1.getTheatres();
+
+        for(Theatre theatre : theatres){
+            city.setTheatres(Arrays.asList(theatre));
+        }
+
+
 
 
         return city;
@@ -51,6 +59,11 @@ public class CityServiceImp implements CityService {
         city.setId(cityObj.getId());
         city.setName(cityObj.getName());
         city.setTheatres(cityObj.getTheatres());
+        List<Theatre> theatres = cityObj.getTheatres();
+
+        for(Theatre theatre : theatres){
+            city.setTheatres(Arrays.asList(theatre));
+        }
 
         return city;
     }

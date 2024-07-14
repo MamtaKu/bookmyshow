@@ -127,56 +127,64 @@ public class BookMyShowApplication implements CommandLineRunner {
         screen3.setSeats(Arrays.asList(seat,seat2,seat3));
         screen3.setFeatures(Arrays.asList(Feature.IMAX,Feature.HD));
         screenRepository.save(screen3);
-//
-//        Theatre theatre1 = new Theatre();
-//        theatre1.setName("Nexus");
-//        theatre1.setScreens(Arrays.asList(screen));
-//        theatreRepository.save(theatre1);
-//
-//        Theatre theatre2 = new Theatre();
-//        theatre2.setName("Orion");
-//        theatre2.setScreens(Arrays.asList(screen));
-//        theatreRepository.save(theatre2);
-//
-//        Theatre theatre3 = new Theatre();
-//        theatre3.setName("lulu mall");
-//        theatre3.setScreens(Arrays.asList(screen));
-//        theatreRepository.save(theatre3);
-//
-//
-//        Theatre theatre4 = new Theatre();
-//        theatre4.setName("Shantiniketan");
-//        theatre4.setScreens(Arrays.asList(screen));
-//
-//        theatreRepository.save(theatre4);
-//
-//
-//        Theatre theatre5 = new Theatre();
-//        theatre5.setName("Miraj");
-//        theatre5.setScreens(Arrays.asList(screen));
-//
-//        theatreRepository.save(theatre5);
-//
-//        Theatre theatre6 = new Theatre();
-//        theatre6.setName("Forum");
-//        theatre6.setScreens(Arrays.asList(screen));
-//
-//        theatreRepository.save(theatre6);
-//
-//        City city1 = new City();
-//        city1.setName("Bangalore");
-//        city1.setTheatres(Arrays.asList(theatre1,theatre6, theatre2));
-//        cityRepository.save(city1);
-//
-//        City city2 = new City();
-//        city2.setName("Mumbai");
-//        city2.setTheatres(Arrays.asList(theatre3,theatre4,theatre5));
-//        cityRepository.save(city2);
-//
-//        City city3 = new City();
-//        city3.setName("Kolkata");
-//        city3.setTheatres(Arrays.asList(theatre1,theatre4));
-//        cityRepository.save(city3);
+
+
+
+        City city1 = new City();
+        city1.setName("Bangalore");
+        //city1.setTheatres(Arrays.asList(theatre1,theatre6, theatre2));
+        cityRepository.save(city1);
+
+        City city2 = new City();
+        city2.setName("Mumbai");
+        //city2.setTheatres(Arrays.asList(theatre3,theatre4,theatre5));
+        cityRepository.save(city2);
+
+        City city3 = new City();
+        city3.setName("Kolkata");
+        //city3.setTheatres(Arrays.asList(theatre1,theatre4));
+        cityRepository.save(city3);
+
+        Theatre theatre1 = new Theatre();
+        theatre1.setName("Nexus");
+        theatre1.setScreens(Arrays.asList(screen));
+        theatre1.setCity(city1);
+        theatreRepository.save(theatre1);
+
+        Theatre theatre2 = new Theatre();
+        theatre2.setName("Orion");
+        theatre2.setScreens(Arrays.asList(screen,screen2));
+        theatre2.setCity(city2);
+        theatreRepository.save(theatre2);
+
+        Theatre theatre3 = new Theatre();
+        theatre3.setName("lulu mall");
+        theatre3.setScreens(Arrays.asList(screen, screen2, screen3));
+        theatre3.setCity(city3);
+        theatreRepository.save(theatre3);
+
+
+        Theatre theatre4 = new Theatre();
+        theatre4.setName("Shantiniketan");
+        theatre4.setScreens(Arrays.asList(screen,screen2,screen3));
+        theatre4.setCity(city1);
+
+        theatreRepository.save(theatre4);
+
+
+        Theatre theatre5 = new Theatre();
+        theatre5.setName("Miraj");
+        theatre5.setScreens(Arrays.asList(screen));
+        theatre5.setCity(city2);
+
+        theatreRepository.save(theatre5);
+
+        Theatre theatre6 = new Theatre();
+        theatre6.setName("Forum");
+        theatre6.setScreens(Arrays.asList(screen,screen3));
+        theatre6.setCity(city3);
+
+        theatreRepository.save(theatre6);
 
 
 

@@ -16,10 +16,10 @@ public class Theatre extends Basemodel {
     @Column(unique = true)
     private String name;
 
-//    @ManyToOne
-//    private City city;
+    @ManyToOne
+    private City city;
 
-    @OneToMany
+    @OneToMany(mappedBy = "theatre")
     private List<Screen> screens;
 }
 

@@ -16,4 +16,6 @@ public class Seat extends Basemodel {
     private String seatNumber;
     @Enumerated(EnumType.ORDINAL)
     private SeatType seatType;
+    @ManyToOne
+    private Screen screen;
 }

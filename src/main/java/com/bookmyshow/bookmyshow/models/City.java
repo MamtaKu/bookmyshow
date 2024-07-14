@@ -13,9 +13,10 @@ import java.util.List;
 @Setter
 @Entity
 public class City extends Basemodel {
-    @Column(nullable = false, unique = true)
+
     private String name;
-    @OneToMany()
+
+    @OneToMany(mappedBy = "city")
     private List<Theatre> theatres;
 
 
