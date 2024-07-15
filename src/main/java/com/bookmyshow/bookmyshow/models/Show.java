@@ -1,5 +1,6 @@
 package com.bookmyshow.bookmyshow.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -15,7 +16,7 @@ public class Show extends Basemodel {
 
     @ManyToOne
     @JoinColumn(name = "movie_id")
-    @JsonManagedReference
+    @JsonBackReference
     private Movie movie;
 
     private Date startTime;
@@ -26,6 +27,7 @@ public class Show extends Basemodel {
 
     @ManyToOne
     @JoinColumn(name = "screen_id")
+    @JsonBackReference
     private Screen screen;
 
     @Enumerated(EnumType.ORDINAL)

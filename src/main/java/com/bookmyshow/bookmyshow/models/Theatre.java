@@ -1,6 +1,7 @@
 package com.bookmyshow.bookmyshow.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,6 +21,7 @@ public class Theatre extends Basemodel {
     private City city;
 
     @OneToMany(mappedBy = "theatre")
+    @JsonManagedReference
     private List<Screen> screens;
 }
 

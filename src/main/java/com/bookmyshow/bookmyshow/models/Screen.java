@@ -1,6 +1,7 @@
 package com.bookmyshow.bookmyshow.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,6 +15,7 @@ public class Screen extends Basemodel {
     private String name;
 
     @OneToMany(mappedBy = "screen")
+    @JsonManagedReference
     private List<Seat> seats;
 
     @Enumerated(EnumType.ORDINAL)
