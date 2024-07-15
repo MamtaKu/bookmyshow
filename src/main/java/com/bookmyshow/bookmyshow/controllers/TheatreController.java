@@ -25,7 +25,7 @@ public class TheatreController {
         return theatreService.getTheatreById(id);
     }
 
-    @GetMapping
+    @GetMapping ()
     public List<Theatre> getAllTheaters(){
         return theatreService.getAllTheatres();
 

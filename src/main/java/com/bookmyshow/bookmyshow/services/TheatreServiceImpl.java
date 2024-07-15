@@ -11,14 +11,16 @@ import java.util.Optional;
 public class TheatreServiceImpl implements TheatreService {
     private TheatreRepository theatreRepository;
 
+    public TheatreServiceImpl(TheatreRepository theatreRepository) {
+        this.theatreRepository = theatreRepository;
+    }
+
     @Override
     public Theatre getTheatreById(Long id) {
         Optional<Theatre> optionalTheater = theatreRepository.findById(id);
         Theatre theatre = new Theatre();
         theatre.setId(optionalTheater.get().getId());
         theatre.setName(optionalTheater.get().getName());
-
-
 
         return theatre;
  }
