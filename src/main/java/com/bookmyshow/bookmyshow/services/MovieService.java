@@ -7,4 +7,6 @@ import java.util.List;
 public interface MovieService {
     Movie getMovieById(Long id);
     List<Movie> getAllMovie();
+
+    List<Movie> getMoviesByCityAndTheatre(String city, String theatre);
 }

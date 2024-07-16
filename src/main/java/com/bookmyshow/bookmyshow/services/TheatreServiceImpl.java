@@ -22,8 +22,8 @@ public class TheatreServiceImpl implements TheatreService {
         Optional<Theatre> optionalTheater = theatreRepository.findById(id);
         Theatre theatre = new Theatre();
         theatre.setId(optionalTheater.get().getId());
-        theatre.setName(optionalTheater.get().getName());
-        theatre.setScreens(optionalTheater.get().getScreens());
+//        theatre.setName(optionalTheater.get().getName());
+//        theatre.setScreens(optionalTheater.get().getScreens());
 
 
 
@@ -38,22 +38,27 @@ public class TheatreServiceImpl implements TheatreService {
 
     @Override
     public List<Theatre> getTheatresByCity(String city) {
-        List<Theatre> allTheatres = theatreRepository.findByName(city);
+        List<Theatre> allTheatres = theatreRepository.findByCity_name(city);
         List<Theatre> result = new ArrayList<>();
 
         for(Theatre theatre : allTheatres ) {
 
 
-            if ("Bangalore".equalsIgnoreCase(city)) {
-                result.add(covertToTheatre(theatre));
-
+            if ("Bangalore".equalsIgnoreCase(theatre.getCity().getName())) {
+                result.add(convertToTheatre(theatre));
+            }
+            else if("Mumbai".equalsIgnoreCase(theatre.getCity().getName())){
+                result.add(convertToTheatre(theatre));
+            }
+            else if("Kolkata".equalsIgnoreCase(theatre.getCity().getName())){
+                result.add(convertToTheatre(theatre));
             }
         }
         return result;
 
     }
 
-    private Theatre covertToTheatre(Theatre theatreObj) {
+    private Theatre convertToTheatre(Theatre theatreObj) {
         Theatre theatre = new Theatre();
         theatre.setId(theatreObj.getId());
         theatre.setCity(theatreObj.getCity());

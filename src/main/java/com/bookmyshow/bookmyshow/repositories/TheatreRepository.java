@@ -11,5 +11,5 @@ public interface TheatreRepository extends JpaRepository<Theatre, Long> {
     @Override
     List<Theatre> findAll();
 
-    List<Theatre> findByName(String name);
+    List<Theatre> findByCity_name(String name);
 }

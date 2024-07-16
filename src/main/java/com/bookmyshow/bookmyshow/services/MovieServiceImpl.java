@@ -40,6 +40,20 @@ public class MovieServiceImpl implements MovieService {
         return movies;
     }
 
+    @Override
+    public List<Movie> getMoviesByCityAndTheatre(String city, String theatre) {
+        List<Movie> byCityAndTheatre = movieRepository.findMoviesByCityAndTheatre(city, theatre);
+        List<Movie> allMovies = new ArrayList<>();
+
+        for(Movie movie : byCityAndTheatre ){
+           //if("Bangalore".equalsIgnoreCase() && "Nexus".equalsIgnoreCase(movie.getShows().get())){
+           //    allMovies.add(convertToMovie(movie));
+            //}
+        }
+        return allMovies;
+
+    }
+
     private Movie convertToMovie(Movie movieObj) {
         Movie movie = new Movie();
         movie.setId(movieObj.getId());

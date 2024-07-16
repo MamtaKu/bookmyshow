@@ -49,9 +49,9 @@ public class ScreenServiceImpl implements  ScreenService{
         Screen screen = new Screen();
         screen.setId(screenObj.getId());
         screen.setName(screenObj.getName());
-        screen.setTheatre(screenObj.getTheatre());
-        screen.setFeatures(screenObj.getFeatures());
-        screen.setSeats(screenObj.getSeats());
+        //.setTheatre(screenObj.getTheatre());
+       // screen.setFeatures(screenObj.getFeatures());
+       // screen.setSeats(screenObj.getSeats());
         return screen;
 
     }

@@ -20,6 +20,8 @@ public class Theatre extends Basemodel {
     @JsonBackReference
     private City city;
 
+//
+
     @OneToMany(mappedBy = "theatre")
     @JsonManagedReference
     private List<Screen> screens;

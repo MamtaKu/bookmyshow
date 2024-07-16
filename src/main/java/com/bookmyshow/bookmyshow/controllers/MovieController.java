@@ -2,10 +2,7 @@ package com.bookmyshow.bookmyshow.controllers;
 
 import com.bookmyshow.bookmyshow.models.Movie;
 import com.bookmyshow.bookmyshow.services.MovieService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,6 +26,11 @@ public class MovieController {
     public List<Movie> getAllMovie(){
         return movieService.getAllMovie();
 
+    }
+
+    @GetMapping("/byCityAndTheatre")
+    public List<Movie> getMoviesByCityAndTheatre(@RequestParam  String city, @RequestParam String theatre){
+        return movieService.getMoviesByCityAndTheatre(city, theatre);
     }
 
 

@@ -56,7 +56,7 @@ public class CityServiceImp implements CityService {
         City city = new City();
         city.setId(cityObj.getId());
         city.setName(cityObj.getName());
-        city.setTheatres(cityObj.getTheatres());
+        //city.setTheatres(cityObj.getTheatres());
 //        List<Theatre> theatres = cityObj.getTheatres();
 //
 //        for(Theatre theatre : theatres){
