@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/screens")
 public class ScreenController {
@@ -20,5 +22,10 @@ public class ScreenController {
     public Screen getScreenById(@PathVariable("{id}") Long id){
 
         return screenService.getScreenById(id);
+    }
+
+    @GetMapping
+    public List<Screen>  getAllScreens(){
+        return screenService.getAllScreens();
     }
 }

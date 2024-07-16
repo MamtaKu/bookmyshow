@@ -8,4 +8,6 @@ public interface TheatreService {
 
     Theatre getTheatreById(Long id);
     List<Theatre> getAllTheatres();
+
+    List<Theatre> getTheatresByCity(String name);
 }

@@ -2,10 +2,7 @@ package com.bookmyshow.bookmyshow.controllers;
 
 import com.bookmyshow.bookmyshow.models.Theatre;
 import com.bookmyshow.bookmyshow.services.TheatreService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,5 +26,10 @@ public class TheatreController {
     public List<Theatre> getAllTheaters(){
         return theatreService.getAllTheatres();
 
+    }
+
+    @GetMapping
+    public List<Theatre> getTheatresByCity(@RequestParam String city){
+        return theatreService.getTheatresByCity(city);
     }
 }
