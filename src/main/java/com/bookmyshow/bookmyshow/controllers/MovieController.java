@@ -10,7 +10,7 @@ import java.util.List;
 @RequestMapping("/movie")
 public class MovieController {
 
-    private MovieService movieService;
+    private final MovieService movieService;
 
     public MovieController(MovieService movieService) {
         this.movieService = movieService;
@@ -31,6 +31,7 @@ public class MovieController {
     @GetMapping("/byCityAndTheatre")
     public List<Movie> getMoviesByCityAndTheatre(@RequestParam  String city, @RequestParam String theatre){
         return movieService.getMoviesByCityAndTheatre(city, theatre);
+        //update shows set theatre_id = 1 where screen_id = 1; query to update
     }
 
 

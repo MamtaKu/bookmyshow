@@ -50,7 +50,7 @@ public class MovieServiceImpl implements MovieService {
            //    allMovies.add(convertToMovie(movie));
             //}
         }
-        return allMovies;
+        return byCityAndTheatre;
 
     }
 
