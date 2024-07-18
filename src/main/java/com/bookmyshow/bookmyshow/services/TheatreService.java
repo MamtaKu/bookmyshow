@@ -10,4 +10,6 @@ public interface TheatreService {
     List<Theatre> getAllTheatres();
 
     List<Theatre> getTheatresByCity(String name);
+
+    List<Theatre> getTheatresByCityAndMovie(String city, String theatre);
 }

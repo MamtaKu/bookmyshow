@@ -18,6 +18,10 @@ public class Screen extends Basemodel {
     @JsonManagedReference
     private List<Seat> seats;
 
+    @OneToMany(mappedBy = "screen")
+    @JsonManagedReference
+    private List<Show> shows;
+
     @Enumerated(EnumType.ORDINAL)
     @ElementCollection
     private List<Feature> features;

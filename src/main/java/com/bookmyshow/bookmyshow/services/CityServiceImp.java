@@ -44,6 +44,7 @@ public class CityServiceImp implements CityService {
         List<City> cities = new ArrayList<>();
         List<City> allcity = cityRepository.findAll();
 
+
         for(City city: allcity){
            cities.add(convertToCity(city));
         }

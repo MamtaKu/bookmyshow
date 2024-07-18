@@ -36,5 +36,6 @@ public class Show extends Basemodel {
 
     @ManyToOne
     @JoinColumn(name = "theatre_id")
+    @JsonBackReference
     private Theatre theatre;
 }

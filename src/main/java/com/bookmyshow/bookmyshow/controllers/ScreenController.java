@@ -2,10 +2,7 @@ package com.bookmyshow.bookmyshow.controllers;
 
 import com.bookmyshow.bookmyshow.models.Screen;
 import com.bookmyshow.bookmyshow.services.ScreenService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,6 +23,13 @@ public class ScreenController {
 
     @GetMapping
     public List<Screen>  getAllScreens(){
+
         return screenService.getAllScreens();
+    }
+
+    //get screen name
+    @GetMapping("/byCityAndTheatreAndMovieAndShows")
+    public Screen getScreenNameByCityAndTheatreAndMovieAndShows(@RequestParam String city,@RequestParam String theatre,@RequestParam String movie,@RequestParam String show ){
+        return screenService.getScreenNameByCityAndTheatreAndMovieAndShow(city,theatre,movie,show);
     }
 }

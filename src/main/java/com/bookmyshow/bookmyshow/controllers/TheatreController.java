@@ -32,4 +32,9 @@ public class TheatreController {
     public List<Theatre> getTheatresByCity(@RequestParam("city") String city){
         return theatreService.getTheatresByCity(city);
     }
+
+    @GetMapping("/byCityAndMovie")
+    public List<Theatre> getTheatresByCityAndMovie(@RequestParam("city") String city, @RequestParam("movie") String movie){
+        return theatreService.getTheatresByCityAndMovie(city, movie);
+    }
 }

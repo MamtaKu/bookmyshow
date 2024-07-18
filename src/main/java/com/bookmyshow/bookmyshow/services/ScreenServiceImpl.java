@@ -45,6 +45,13 @@ public class ScreenServiceImpl implements  ScreenService{
 
     }
 
+    @Override
+    public Screen getScreenNameByCityAndTheatreAndMovieAndShow(String city, String theatre, String movie, String show) {
+        return null;
+    }
+
+
+
     private Screen convertToScreen(Screen screenObj) {
         Screen screen = new Screen();
         screen.setId(screenObj.getId());

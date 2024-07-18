@@ -39,22 +39,30 @@ public class TheatreServiceImpl implements TheatreService {
     @Override
     public List<Theatre> getTheatresByCity(String city) {
         List<Theatre> allTheatres = theatreRepository.findByCity_name(city);
-        List<Theatre> result = new ArrayList<>();
+//        List<Theatre> result = new ArrayList<>();
+//
+//        for(Theatre theatre : allTheatres ) {
+//
+//
+//            if ("Bangalore".equalsIgnoreCase(theatre.getCity().getName())) {
+//                result.add(convertToTheatre(theatre));
+//            }
+//            else if("Mumbai".equalsIgnoreCase(theatre.getCity().getName())){
+//                result.add(convertToTheatre(theatre));
+//            }
+//            else if("Kolkata".equalsIgnoreCase(theatre.getCity().getName())){
+//                result.add(convertToTheatre(theatre));
+//            }
+//        }
+        return allTheatres;
 
-        for(Theatre theatre : allTheatres ) {
+    }
 
+    @Override
+    public List<Theatre> getTheatresByCityAndMovie(String city, String movie) {
+        List<Theatre> theatres = theatreRepository.findTheatresByCityAndMovie(city,movie);
+        return theatres;
 
-            if ("Bangalore".equalsIgnoreCase(theatre.getCity().getName())) {
-                result.add(convertToTheatre(theatre));
-            }
-            else if("Mumbai".equalsIgnoreCase(theatre.getCity().getName())){
-                result.add(convertToTheatre(theatre));
-            }
-            else if("Kolkata".equalsIgnoreCase(theatre.getCity().getName())){
-                result.add(convertToTheatre(theatre));
-            }
-        }
-        return result;
 
     }
 

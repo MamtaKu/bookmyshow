@@ -10,4 +10,6 @@ public interface ScreenService {
     Screen getScreenById(Long id);
     List<Screen> getAllScreens();
 
+    Screen getScreenNameByCityAndTheatreAndMovieAndShow(String city, String theatre,String movie,String show);
+
 }
