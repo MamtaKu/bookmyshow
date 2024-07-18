@@ -29,7 +29,7 @@ public class ScreenController {
 
     //get screen name
     @GetMapping("/byCityAndTheatreAndMovieAndShows")
-    public Screen getScreenNameByCityAndTheatreAndMovieAndShows(@RequestParam String city,@RequestParam String theatre,@RequestParam String movie,@RequestParam String show ){
-        return screenService.getScreenNameByCityAndTheatreAndMovieAndShow(city,theatre,movie,show);
+    public Screen getScreenNameByCityAndTheatreAndMovieAndShows(@RequestParam String city,@RequestParam String theatre ){
+        return screenService.getScreenNameByCityAndTheatreAndMovieAndShow(city,theatre);
     }
 }

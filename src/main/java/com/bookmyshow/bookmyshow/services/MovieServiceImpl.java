@@ -41,7 +41,7 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public List<Movie> getMoviesByCityAndTheatre(String city, String theatre) {
+    public List<Movie>  getMoviesByCityAndTheatre(String city, String theatre) {
         List<Movie> byCityAndTheatre = movieRepository.findMoviesByCityAndTheatre(city, theatre);
         List<Movie> allMovies = new ArrayList<>();
 
