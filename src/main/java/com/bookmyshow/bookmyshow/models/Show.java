@@ -1,7 +1,6 @@
 package com.bookmyshow.bookmyshow.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,7 +18,9 @@ public class Show extends Basemodel {
     @JsonBackReference
     private Movie movie;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     private Date startTime;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     private Date endTime;
 
 //    @OneToMany
@@ -27,11 +28,12 @@ public class Show extends Basemodel {
 
     @ManyToOne
     @JoinColumn(name = "screen_id")
-    @JsonBackReference
+    @JsonIgnoreProperties("shows")
     private Screen screen;
 
     @Enumerated(EnumType.ORDINAL)
     @ElementCollection
+    @JsonIgnore
     private List<Feature> features;
 
     @ManyToOne

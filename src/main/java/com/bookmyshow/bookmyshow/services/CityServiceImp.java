@@ -45,11 +45,11 @@ public class CityServiceImp implements CityService {
         List<City> allcity = cityRepository.findAll();
 
 
-        for(City city: allcity){
-           cities.add(convertToCity(city));
-        }
+//        for(City city: allcity){
+//           cities.add(convertToCity(city));
+//        }
 
-        return cities;
+        return allcity;
     }
 
 

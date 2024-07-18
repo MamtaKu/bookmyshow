@@ -28,6 +28,11 @@ public class CityController {
 
     @GetMapping
     public List<City> getAllCity(){
+
         return cityService.getAllCity();
     }
+
+
+
+
 }

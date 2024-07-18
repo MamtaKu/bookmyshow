@@ -1,5 +1,6 @@
 package com.bookmyshow.bookmyshow.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,6 +15,7 @@ import java.util.Date;
 public class Basemodel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private Long id;
 
 //    @CreatedDate

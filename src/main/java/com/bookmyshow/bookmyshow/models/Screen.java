@@ -1,6 +1,8 @@
 package com.bookmyshow.bookmyshow.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -16,14 +18,18 @@ public class Screen extends Basemodel {
 
     @OneToMany(mappedBy = "screen")
     @JsonManagedReference
+    @JsonIgnore
     private List<Seat> seats;
 
     @OneToMany(mappedBy = "screen")
-    @JsonManagedReference
+//    @JsonManagedReference
+    @JsonIgnoreProperties("screen")
+    @JsonIgnore
     private List<Show> shows;
 
     @Enumerated(EnumType.ORDINAL)
     @ElementCollection
+    @JsonIgnore
     private List<Feature> features;
 
 

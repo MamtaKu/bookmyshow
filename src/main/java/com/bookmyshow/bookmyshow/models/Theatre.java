@@ -1,6 +1,7 @@
 package com.bookmyshow.bookmyshow.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -24,6 +25,7 @@ public class Theatre extends Basemodel {
 
     @OneToMany(mappedBy = "theatre")
     @JsonManagedReference
+    @JsonIgnore
     private List<Screen> screens;
 }
 

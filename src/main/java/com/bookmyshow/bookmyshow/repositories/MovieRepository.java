@@ -18,7 +18,7 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
     @Query("SELECT DISTINCT m FROM Movie m " +
             "JOIN m.shows s " +
             "JOIN s.screen sc " +
-            "JOIN sc.theatre t " + // Change this according to your actual entity relationships
+            "JOIN sc.theatre t " +
             "JOIN t.city c " +
             "WHERE c.name = :city AND t.name = :theatre")
     List<Movie> findMoviesByCityAndTheatre(@Param("city") String city, @Param("theatre") String theatre);

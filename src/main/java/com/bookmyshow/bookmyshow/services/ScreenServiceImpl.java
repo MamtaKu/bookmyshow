@@ -5,6 +5,7 @@ import com.bookmyshow.bookmyshow.repositories.ScreenRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,15 +41,40 @@ public class ScreenServiceImpl implements  ScreenService{
         for(Screen screen : allScreens){
             screens.add(convertToScreen(screen));
         }
-        return screens;
+        return allScreens;
 
 
     }
 
     @Override
-    public Screen getScreenNameByCityAndTheatreAndMovieAndShow(String city, String theatre, String movie, String show) {
-        return null;
+    public List<Screen> getScreenByCityAndTheatre(String city, String theatre) {
+        List<Screen> screenByCityAndTheatre = screenRepository.findScreenByCityAndTheatre(city, theatre);
+        return screenByCityAndTheatre;
+
     }
+
+    @Override
+    public List<Screen> getScreenByCityAndTheatreAndMovie(String city, String theatre, String movie) {
+        List<Screen> screenByCityAndTheatreAndMovie = screenRepository.findScreenByCityAndTheatreAndMovie(city, theatre, movie);
+        return screenByCityAndTheatreAndMovie;
+
+    }
+
+    @Override
+    public Screen getScreenByCityAndTheatreAndMovieAndShow(String city, String theatre, String movie, Date startTime) {
+        return screenRepository.findScreenByCityAndTheatreAndMovieAndShow(city, theatre, movie, startTime);
+    }
+//
+//    @Override
+//    public List<Screen> getScreenNameByCityAndTheatre(String city, String theatre) {
+//        screenRepository.findScreenByCityAndTheatre(city, theatre);
+//        return screenByCityAndTheatre;
+//
+//    }
+
+
+
+
 
 
 
