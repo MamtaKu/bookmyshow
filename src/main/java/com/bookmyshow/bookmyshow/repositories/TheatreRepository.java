@@ -22,4 +22,8 @@ public interface TheatreRepository extends JpaRepository<Theatre, Long> {
             "JOIN t.city c " +
             "WHERE c.name = :city AND m.name = :movie")
     List<Theatre> findTheatresByCityAndMovie(@Param("city") String city,@Param("movie") String movie);
+
+    boolean existsByName(String name);
+
+    boolean existsByCityName(City city);
 }

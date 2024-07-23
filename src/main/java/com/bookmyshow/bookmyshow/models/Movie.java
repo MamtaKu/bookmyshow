@@ -16,7 +16,7 @@ public class Movie extends Basemodel {
     private String name;
     private String description;
 
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     @ElementCollection
     List<Feature> features;
 

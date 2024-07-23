@@ -2,6 +2,9 @@ package com.bookmyshow.bookmyshow.controllers;
 
 import com.bookmyshow.bookmyshow.models.Movie;
 import com.bookmyshow.bookmyshow.services.MovieService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,6 +35,14 @@ public class MovieController {
     public List<Movie> getMoviesByCityAndTheatre(@RequestParam  String city, @RequestParam String theatre){
         return movieService.getMoviesByCityAndTheatre(city, theatre);
     }
+
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Movie> createMovie(@RequestBody Movie movie){
+        Movie createdMovie = movieService.createMovie(movie);
+        return new ResponseEntity<>(createdMovie, HttpStatus.CREATED);
+    }
+
+
 
 
 

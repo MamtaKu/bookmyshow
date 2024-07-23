@@ -9,4 +9,6 @@ public interface MovieService {
     List<Movie> getAllMovie();
 
     List<Movie> getMoviesByCityAndTheatre(String city, String theatre);
+
+    Movie createMovie(Movie movie);
 }

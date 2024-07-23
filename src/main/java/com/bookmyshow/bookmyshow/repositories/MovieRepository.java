@@ -23,4 +23,5 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
             "WHERE c.name = :city AND t.name = :theatre")
     List<Movie> findMoviesByCityAndTheatre(@Param("city") String city, @Param("theatre") String theatre);
 
+    Boolean existsByName(String name);
 }

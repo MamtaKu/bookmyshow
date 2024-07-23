@@ -1,5 +1,6 @@
 package com.bookmyshow.bookmyshow.services;
 
+import com.bookmyshow.bookmyshow.exceptions.MovieAlreadyExistsException;
 import com.bookmyshow.bookmyshow.models.Movie;
 import com.bookmyshow.bookmyshow.repositories.MovieRepository;
 import org.springframework.stereotype.Service;
@@ -54,15 +55,29 @@ public class MovieServiceImpl implements MovieService {
 
     }
 
+    @Override
+    public Movie createMovie(Movie movie) {
+        Boolean b = movieRepository.existsByName(movie.getName());
+        if(b){
+            throw new MovieAlreadyExistsException("Movie Already Exists");
+        }
+        Movie movie1 = convertToMovie(movie);
+        return  movieRepository.save(movie1);
+
+    }
+
     private Movie convertToMovie(Movie movieObj) {
         Movie movie = new Movie();
         movie.setId(movieObj.getId());
         movie.setName(movieObj.getName());
         movie.setFeatures(movieObj.getFeatures());
         movie.setDescription(movieObj.getDescription());
-        movie.setShows(movieObj.getShows());
+       // movie.setShows(movieObj.getShows());
         return movie;
     }
+
+
+
 
 
 }

@@ -1,5 +1,6 @@
 package com.bookmyshow.bookmyshow.services;
 
+import com.bookmyshow.bookmyshow.exceptions.CityAlreadyExistsException;
 import com.bookmyshow.bookmyshow.models.City;
 import com.bookmyshow.bookmyshow.models.Theatre;
 import com.bookmyshow.bookmyshow.repositories.CityRepository;
@@ -52,6 +53,63 @@ public class CityServiceImp implements CityService {
         return allcity;
     }
 
+    @Override
+    public City findByName(String name) {
+        Optional<City> byName = cityRepository.findByName(name);
+        return byName.get();
+
+    }
+
+    @Override
+    public City createCity(City city) {
+
+        if(cityRepository.existsByName(city.getName())){
+            throw new CityAlreadyExistsException("City Already exists");
+        }
+
+            City city1 = convertToCity(city);
+
+
+
+       return cityRepository.save(city1);
+
+
+    }
+
+    @Override
+    public void deleteCity(Long id) {
+        if(!cityRepository.existsById(id)){
+            throw new RuntimeException("City not found with id "+ id);
+
+        }
+
+        cityRepository.deleteById(id);
+    }
+
+    @Override
+    public City updateCity(Long id, City city) {
+        if(!cityRepository.existsById(id))
+            throw new RuntimeException("City not found with id "+ id);
+
+        Optional<City> optionalCity = cityRepository.findById(id);
+        City existingCity = optionalCity.get();
+
+        existingCity.setName(city.getName());
+        existingCity.setTheatres(city.getTheatres());
+        return cityRepository.save(existingCity);
+   }
+
+    @Override
+    public City patchCity(Long id, City city) {
+        if(!cityRepository.existsById(id))
+            throw new RuntimeException("City not found with id "+ id);
+
+        Optional<City> optionalCity = cityRepository.findById(id);
+        City existingCity = optionalCity.get();
+        existingCity.setName(city.getName());
+        return cityRepository.save(existingCity);
+    }
+
 
     private static City convertToCity(City cityObj){
         City city = new City();
@@ -66,4 +124,7 @@ public class CityServiceImp implements CityService {
 
         return city;
     }
+
+
+
 }
