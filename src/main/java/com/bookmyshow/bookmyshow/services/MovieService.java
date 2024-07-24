@@ -1,5 +1,6 @@
 package com.bookmyshow.bookmyshow.services;
 
+import com.bookmyshow.bookmyshow.dtos.MovieRequestDto;
 import com.bookmyshow.bookmyshow.models.Movie;
 
 import java.util.List;
@@ -10,5 +11,5 @@ public interface MovieService {
 
     List<Movie> getMoviesByCityAndTheatre(String city, String theatre);
 
-    Movie createMovie(Movie movie);
+    Movie createMovie(MovieRequestDto movie);
 }

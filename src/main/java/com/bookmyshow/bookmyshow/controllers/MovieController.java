@@ -1,5 +1,6 @@
 package com.bookmyshow.bookmyshow.controllers;
 
+import com.bookmyshow.bookmyshow.dtos.MovieRequestDto;
 import com.bookmyshow.bookmyshow.models.Movie;
 import com.bookmyshow.bookmyshow.services.MovieService;
 import org.springframework.http.HttpStatus;
@@ -37,8 +38,8 @@ public class MovieController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Movie> createMovie(@RequestBody Movie movie){
-        Movie createdMovie = movieService.createMovie(movie);
+    public ResponseEntity<Movie> createMovie(@RequestBody MovieRequestDto movieRequestDto){
+        Movie createdMovie = movieService.createMovie(movieRequestDto);
         return new ResponseEntity<>(createdMovie, HttpStatus.CREATED);
     }
 
