@@ -1,6 +1,7 @@
 package com.bookmyshow.bookmyshow.services;
 
 
+import com.bookmyshow.bookmyshow.dtos.ScreenRequestDto;
 import com.bookmyshow.bookmyshow.models.Screen;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -17,4 +18,12 @@ public interface ScreenService {
 
     Screen getScreenByCityAndTheatreAndMovieAndShow(String city, String theatre, String movie, Date startTime);
 
+    Screen createScreen(ScreenRequestDto screenRequestDto);
+
+    Screen updateScreen(Long id, ScreenRequestDto screenRequestDto);
+    void deleteScreen(Long id);
+
+    Screen patchScreen(Long id, ScreenRequestDto screenRequestDto);
+
+    Screen findByName(String name);
 }

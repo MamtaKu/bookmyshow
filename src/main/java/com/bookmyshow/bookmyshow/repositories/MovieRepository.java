@@ -24,4 +24,6 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
     List<Movie> findMoviesByCityAndTheatre(@Param("city") String city, @Param("theatre") String theatre);
 
     Boolean existsByName(String name);
+
+    Movie findByName(String name);
 }

@@ -9,4 +9,6 @@ public interface ShowRepository extends JpaRepository<Show, Long> {
 
     @Override
     Optional<Show> findById(Long id);
+
+    boolean existsByScreen_Name(String showRequestDto);
 }

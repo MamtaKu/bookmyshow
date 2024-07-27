@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface TheatreRepository extends JpaRepository<Theatre, Long> {
     @Override
@@ -26,4 +27,6 @@ public interface TheatreRepository extends JpaRepository<Theatre, Long> {
     boolean existsByName(String name);
 
     boolean existsByCityName(City city);
+
+    Optional<Theatre> findByName(String name);
 }

@@ -1,6 +1,8 @@
 package com.bookmyshow.bookmyshow.services;
 
+import com.bookmyshow.bookmyshow.dtos.MovieRequestDto;
 import com.bookmyshow.bookmyshow.exceptions.MovieAlreadyExistsException;
+import com.bookmyshow.bookmyshow.exceptions.MovieNotFoundException;
 import com.bookmyshow.bookmyshow.models.Movie;
 import com.bookmyshow.bookmyshow.repositories.MovieRepository;
 import org.springframework.stereotype.Service;
@@ -33,12 +35,12 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public List<Movie> getAllMovie() {
-        List<Movie> movies = new ArrayList<>();
+        //List<Movie> movies = new ArrayList<>();
         List<Movie> allMovies = movieRepository.findAll();
-        for(Movie movie : allMovies){
-            movies.add(convertToMovie(movie));
-        }
-        return movies;
+//        for(Movie movie : allMovies){
+//            movies.add(convertToMovie(movie));
+//        }
+        return allMovies;
     }
 
     @Override
@@ -56,7 +58,7 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public Movie createMovie(Movie movie) {
+    public Movie createMovie(MovieRequestDto movie) {
         Boolean b = movieRepository.existsByName(movie.getName());
         if(b){
             throw new MovieAlreadyExistsException("Movie Already Exists");
@@ -66,7 +68,62 @@ public class MovieServiceImpl implements MovieService {
 
     }
 
-    private Movie convertToMovie(Movie movieObj) {
+    @Override
+    public void deleteMovie(Long id) {
+        if(!movieRepository.existsById(id)){
+            throw new MovieNotFoundException("Movie is not present with this id " + id);
+
+        }
+        movieRepository.deleteById(id);
+    }
+
+    @Override
+    public Movie updateMovie(Long id, MovieRequestDto movieRequestDto) {
+
+        Optional<Movie> byId = movieRepository.findById(id);
+        if(byId.isPresent()) {
+
+            Movie existingMovie = byId.get();
+            existingMovie.setName(movieRequestDto.getName());
+            existingMovie.setFeatures(movieRequestDto.getFeatures());
+            existingMovie.setDescription(movieRequestDto.getDescription());
+            Movie updatedMovie = movieRepository.save(existingMovie);
+
+            return updatedMovie;
+        }
+        else{
+            throw new MovieNotFoundException("Movie not exists with this id :" + id);
+        }
+
+
+
+    }
+
+    public Movie patchMovie(Long id, MovieRequestDto movieRequestDto) {
+        Movie movie = movieRepository.findById(id).orElseThrow(() -> new RuntimeException("Movie not found"));
+
+        if (movieRequestDto.getName() != null) {
+            movie.setName(movieRequestDto.getName());
+        }
+        if (movieRequestDto.getDescription() != null) {
+            movie.setDescription(movieRequestDto.getDescription());
+        }
+        if (movieRequestDto.getFeatures() != null) {
+            movie.setFeatures(movieRequestDto.getFeatures());
+        }
+
+        return movieRepository.save(movie);
+    }
+
+    @Override
+    public Movie findByName(String name) {
+
+        Optional<Movie> byName = Optional.ofNullable(movieRepository.findByName(name));
+        return byName.get();
+
+    }
+
+    private Movie convertToMovie(MovieRequestDto movieObj) {
         Movie movie = new Movie();
         movie.setId(movieObj.getId());
         movie.setName(movieObj.getName());

@@ -1,5 +1,6 @@
 package com.bookmyshow.bookmyshow.controllers;
 
+import com.bookmyshow.bookmyshow.dtos.MovieRequestDto;
 import com.bookmyshow.bookmyshow.models.Movie;
 import com.bookmyshow.bookmyshow.services.MovieService;
 import org.springframework.http.HttpStatus;
@@ -37,10 +38,31 @@ public class MovieController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Movie> createMovie(@RequestBody Movie movie){
+    public ResponseEntity<Movie> createMovie(@RequestBody MovieRequestDto movie){
         Movie createdMovie = movieService.createMovie(movie);
         return new ResponseEntity<>(createdMovie, HttpStatus.CREATED);
     }
+
+
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteMovie(@PathVariable Long id){
+        movieService.deleteMovie(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Movie> updateMovie(@PathVariable Long id, @RequestBody MovieRequestDto movieRequestDto){
+        Movie updatedMovie = movieService.updateMovie(id, movieRequestDto);
+        return new ResponseEntity<>(updatedMovie, HttpStatus.OK);
+    }
+    @PatchMapping("/{id}")
+    public ResponseEntity<Movie> patchMovie(@PathVariable Long id, @RequestBody MovieRequestDto movieRequestDto) {
+        Movie patchedMovie = movieService.patchMovie(id, movieRequestDto);
+        return new ResponseEntity<>(patchedMovie, HttpStatus.OK);
+    }
+
+
 
 
 

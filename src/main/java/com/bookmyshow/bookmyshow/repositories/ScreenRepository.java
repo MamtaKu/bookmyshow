@@ -37,4 +37,8 @@ public interface ScreenRepository extends JpaRepository<Screen, Long> {
             "JOIN t.city c " +
             "WHERE c.name = :city AND t.name = :theatre AND m.name = :movie AND sh.startTime = :startTime")
     Screen findScreenByCityAndTheatreAndMovieAndShow(@Param("city") String city, @Param("theatre") String theatre, @Param("movie") String movie, @Param("startTime") Date startTime);
+
+    boolean existsByName(String name);
+
+    Screen findByName(String name);
 }

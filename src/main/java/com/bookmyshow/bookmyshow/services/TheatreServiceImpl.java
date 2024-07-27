@@ -135,6 +135,13 @@ public class TheatreServiceImpl implements TheatreService {
         }
     }
 
+    @Override
+    public Theatre findByName(String name) {
+        Optional<Theatre> byName = theatreRepository.findByName(name);
+        return byName.get();
+
+    }
+
     private Theatre convertToTheatre(Theatre theatreObj) {
         Theatre theatre = new Theatre();
         theatre.setId(theatreObj.getId());

@@ -1,6 +1,7 @@
 package com.bookmyshow.bookmyshow.services;
 
 import com.bookmyshow.bookmyshow.exceptions.TheatreNotFoundException;
+import com.bookmyshow.bookmyshow.models.City;
 import com.bookmyshow.bookmyshow.models.Theatre;
 
 import java.util.List;
@@ -17,4 +18,6 @@ public interface TheatreService {
     Theatre updateTheatre(Long id, Theatre theatre) throws TheatreNotFoundException;
     void deleteTheatre(Long id) throws TheatreNotFoundException;
     Theatre patchTheatre(Long id, Theatre partialTheatre) throws TheatreNotFoundException;
+
+    Theatre findByName(String name);
 }

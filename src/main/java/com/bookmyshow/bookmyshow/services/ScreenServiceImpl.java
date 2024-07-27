@@ -1,6 +1,12 @@
 package com.bookmyshow.bookmyshow.services;
 
+import com.bookmyshow.bookmyshow.dtos.ScreenRequestDto;
+import com.bookmyshow.bookmyshow.exceptions.MovieNotFoundException;
+import com.bookmyshow.bookmyshow.exceptions.ScreenNotFoundException;
+import com.bookmyshow.bookmyshow.models.City;
+import com.bookmyshow.bookmyshow.models.Movie;
 import com.bookmyshow.bookmyshow.models.Screen;
+import com.bookmyshow.bookmyshow.models.Theatre;
 import com.bookmyshow.bookmyshow.repositories.ScreenRepository;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +20,11 @@ public class ScreenServiceImpl implements  ScreenService{
 
     private  ScreenRepository screenRepository;
 
-    public ScreenServiceImpl(ScreenRepository screenRepository) {
+    private TheatreService theatreService;
+
+    public ScreenServiceImpl(ScreenRepository screenRepository, TheatreService theatreService) {
         this.screenRepository = screenRepository;
+        this.theatreService = theatreService;
     }
 
     @Override
@@ -63,6 +72,94 @@ public class ScreenServiceImpl implements  ScreenService{
     @Override
     public Screen getScreenByCityAndTheatreAndMovieAndShow(String city, String theatre, String movie, Date startTime) {
         return screenRepository.findScreenByCityAndTheatreAndMovieAndShow(city, theatre, movie, startTime);
+    }
+
+    @Override
+    public Screen createScreen(ScreenRequestDto screenRequestDto) {
+        if(screenRepository.existsByName(screenRequestDto.getName())){
+            throw new RuntimeException("Screen already exists");
+        }
+
+        Theatre theatre = screenRequestDto.getTheatre();
+        Optional<Theatre> byName = Optional.ofNullable(theatreService.findByName(theatre.getName()));
+        if (byName.isPresent()) {
+            screenRequestDto.setTheatre(byName.get());
+        } else {
+            theatreService.createTheatre(theatre);
+        }
+
+        Screen screen = new Screen();
+        screen.setName(screenRequestDto.getName());
+        screen.setTheatre(screenRequestDto.getTheatre());
+        screen.setFeatures(screenRequestDto.getFeatures());
+        return screenRepository.save(screen);
+    }
+
+    @Override
+    public Screen updateScreen(Long id, ScreenRequestDto screenRequestDto) {
+        Optional<Screen> existingScreeen = screenRepository.findById(id);
+        if(existingScreeen.isPresent()) {
+            Screen updatedScreen = existingScreeen.get();
+            Theatre theatre = screenRequestDto.getTheatre();
+            Optional<Theatre> byName = Optional.ofNullable(theatreService.findByName(theatre.getName()));
+            if(byName.isPresent()){
+                updatedScreen.setTheatre(byName.get());
+            }
+            else{
+                theatreService.createTheatre(theatre);
+            }
+
+
+            updatedScreen.setName(screenRequestDto.getName());
+            updatedScreen.setFeatures(screenRequestDto.getFeatures());
+
+            screenRepository.save(updatedScreen);
+
+            return updatedScreen;
+        }
+        else{
+            throw new ScreenNotFoundException("Screen not exists with this id :" + id);
+        }
+    }
+
+    @Override
+    public void deleteScreen(Long id) {
+        if(!screenRepository.existsById(id)){
+            throw new RuntimeException("Screen Not exists");
+
+        }
+         screenRepository.deleteById(id);
+    }
+
+    @Override
+    public Screen patchScreen(Long id, ScreenRequestDto screenRequestDto) {
+        Optional<Screen> existingScreen = screenRepository.findById(id);
+        if(existingScreen.isPresent()){
+        Screen existedScreen = existingScreen.get();
+
+
+        if(screenRequestDto.getName() != null){
+            existedScreen.setName(screenRequestDto.getName());
+        }
+        if(screenRequestDto.getFeatures() != null){
+            existedScreen.setFeatures(screenRequestDto.getFeatures());
+        }
+        if(screenRequestDto.getTheatre() != null){
+            existedScreen.setTheatre(screenRequestDto.getTheatre());
+        }
+
+            Screen save = screenRepository.save(existedScreen);
+        return save;
+        }
+        else{
+            throw new ScreenNotFoundException("Screen not found with id :"+ id);
+        }
+    }
+
+    @Override
+    public Screen findByName(String name) {
+        Optional<Screen> byName = Optional.ofNullable(screenRepository.findByName(name));
+        return byName.get();
     }
 //
 //    @Override
