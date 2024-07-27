@@ -47,7 +47,7 @@ public class ShowServiceImpl implements ShowService{
 
     @Override
     public Show createShow(ShowRequestDto showRequestDto) {
-        if (showRepository.existsByScreen_Name(showRequestDto.getScreen().getName())) {
+        if ( showRepository.existsByScreen_Name(showRequestDto.getScreen())) {
             throw new ShowAlreadyExistsException("Show already exists with this screen");
         }
 

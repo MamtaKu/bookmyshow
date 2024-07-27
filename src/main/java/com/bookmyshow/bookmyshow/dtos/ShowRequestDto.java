@@ -19,15 +19,15 @@ import java.util.List;
 @Setter
 public class ShowRequestDto {
 
-    private Movie movie;
+    private String movie;
 
     private Date startTime;
 
     private Date endTime;
 
-    private Screen screen;
+    private String screen;
 
-    private List<Feature> features;
+    private String features;
 
-    private Theatre theatre;
+    private String theatre;
 }
