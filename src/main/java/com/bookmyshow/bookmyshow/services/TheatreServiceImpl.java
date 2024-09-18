@@ -24,7 +24,7 @@ public class TheatreServiceImpl implements TheatreService {
         Optional<Theatre> optionalTheater = theatreRepository.findById(id);
         Theatre theatre = new Theatre();
         theatre.setId(optionalTheater.get().getId());
-//        theatre.setName(optionalTheater.get().getName());
+        theatre.setName(optionalTheater.get().getName());
 //        theatre.setScreens(optionalTheater.get().getScreens());
 
 

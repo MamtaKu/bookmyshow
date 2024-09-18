@@ -10,4 +10,8 @@ public interface ShowService {
     List<Show> getAllShows();
 
     Show createShow(ShowRequestDto showRequestDto);
+
+    void deleteShow(Long id);
+    Show updateShow(Long id, ShowRequestDto showRequestDto);
+    Show patchShow(Long id, ShowRequestDto showRequestDto);
 }

@@ -17,3 +17,14 @@ public class ShowSeatType extends Basemodel {
     private SeatType seatType;
     private int price;
 }
+
+
+/*
+       1                 1
+   ShowSeatType ------ Show
+        M                 1
+  Show - X
+  SeatType - GOLD, SILVER....
+
+  ShowSeatType ---XGOLD, XSILVER....
+ */

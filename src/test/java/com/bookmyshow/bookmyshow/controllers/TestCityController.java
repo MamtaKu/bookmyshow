@@ -16,6 +16,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
@@ -73,16 +74,17 @@ public class TestCityController {
         city.setName("TestCity");
 
 
-        City createdCity = new City();
-        createdCity.setId(city.getId());
-        createdCity.setName(city.getName());
+//        City createdCity = new City();
+//        createdCity.setId(city.getId());
+//        createdCity.setName(city.getName());
 
-        when(cityService.createCity(city)).thenReturn(createdCity);
+        when(cityService.createCity(any())).thenReturn(city);
         ResponseEntity<City> response = cityController.createCity(city);
         assertNotNull(response);
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
-        assertEquals(1L, response.getBody().getId());
-        assertEquals("TestCity", response.getBody().getName());
+        assertEquals(city.getId(), response.getBody().getId());
+        assertEquals(city.getName()
+                , response.getBody().getName());
     }
 
     @Test

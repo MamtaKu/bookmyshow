@@ -37,5 +37,23 @@ public class ShowController {
         return new ResponseEntity<>(showService.createShow(showRequestDto), HttpStatus.CREATED);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteShow(@PathVariable Long id){
+        showService.deleteShow(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Show> updateShow(@PathVariable Long id, @RequestBody ShowRequestDto showRequestDto){
+        Show updatedShow = showService.updateShow(id, showRequestDto);
+        return new ResponseEntity<>(updatedShow, HttpStatus.OK);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Show> patchShow(@PathVariable Long id, @RequestBody ShowRequestDto showRequestDto) {
+        Show patchedShow = showService.patchShow(id, showRequestDto);
+        return new ResponseEntity<>(patchedShow, HttpStatus.OK);
+    }
+
 
 }

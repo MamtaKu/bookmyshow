@@ -1,14 +1,16 @@
 package com.bookmyshow.bookmyshow;
 
+import com.bookmyshow.bookmyshow.dtos.UserSignUpRequestDTO;
 import com.bookmyshow.bookmyshow.models.*;
 import com.bookmyshow.bookmyshow.repositories.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.Date;
+
+import static com.bookmyshow.bookmyshow.services.IpGeolocationService.getCityFromIp;
 
 @SpringBootApplication
 public class BookMyShowApplication implements CommandLineRunner {
@@ -18,17 +20,26 @@ public class BookMyShowApplication implements CommandLineRunner {
     private final SeatRepository seatRepository;
     private final ScreenRepository screenRepository;
     private final ShowRepository showRepository;
+    private final ShowSeatRepository showSeatRepository;
+    private final ShowSeatTypeRepository showSeatTypeRepository;
+    private final UserRepository userRepository;
 
     public BookMyShowApplication(MovieRepository movieRepository, CityRepository cityRepository, TheatreRepository theatreRepository,
                                  SeatRepository seatRepository,
                                  ScreenRepository screenRepository,
-                                 ShowRepository showRepository) {
+                                 ShowRepository showRepository,
+                                 ShowSeatRepository showSeatRepository,
+                                 ShowSeatTypeRepository showSeatTypeRepository,
+                                 UserRepository userRepository) {
         this.movieRepository = movieRepository;
         this.cityRepository = cityRepository;
         this.theatreRepository = theatreRepository;
         this.seatRepository = seatRepository;
         this.screenRepository = screenRepository;
         this.showRepository = showRepository;
+        this.showSeatRepository = showSeatRepository;
+        this.showSeatTypeRepository = showSeatTypeRepository;
+        this.userRepository = userRepository;
     }
 
     //    private UserController userController;
@@ -47,6 +58,12 @@ public class BookMyShowApplication implements CommandLineRunner {
 //        dto.setName("Eva");
 //        dto.setEmail("eva@gmail.com");
 //        dto.setPassword("eva@123");
+//
+//
+//        UserSignUpRequestDTO dto2 = new UserSignUpRequestDTO();
+//        dto2.setName("Evan");
+//        dto2.setEmail("evan@gmail.com");
+//        dto2.setPassword("evan@123");
 //
 //        userController.signUp(dto);
 //        System.out.println("User has been inserted");
@@ -104,8 +121,8 @@ public class BookMyShowApplication implements CommandLineRunner {
 //
 //
 //
-
-
+//
+//
 //        City city1 = new City();
 //        city1.setName("Bangalore");
 //        //city1.setTheatres(Arrays.asList(theatre1,theatre6, theatre2));
@@ -255,7 +272,7 @@ public class BookMyShowApplication implements CommandLineRunner {
 //        seat.setRowval(1);
 //        seat.setColval(1);
 //        seat.setSeatNumber("A1");
-//        seat.setSeatType(SeatType.GOLD);
+//        seat.setSeatType(SeatType.SILVER);
 //        seat.setScreen(screen);
 //        seatRepository.save(seat);
 //
@@ -263,7 +280,7 @@ public class BookMyShowApplication implements CommandLineRunner {
 //        seat2.setRowval(2);
 //        seat2.setColval(1);
 //        seat2.setSeatNumber("B1");
-//        seat2.setSeatType(SeatType.SILVER);
+//        seat2.setSeatType(SeatType.GOLD);
 //        seat2.setScreen(screen);
 //        seatRepository.save(seat2);
 //
@@ -324,18 +341,18 @@ public class BookMyShowApplication implements CommandLineRunner {
 //        seat9.setScreen(screen3);
 //        seatRepository.save(seat9);
 //
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
-//        Date startTime1 = sdf.parse("2024-07-20T10:00:00.674+00:00");
-//        Date endTime1 = sdf.parse("2024-07-20T13:00:00.674+00:00");
-//        Date startTime2 = sdf.parse("2024-07-20T14:00:00.674+00:00");
-//        Date endTime2 = sdf.parse("2024-07-20T17:00:00.674+00:00");
-//        Date startTime3 = sdf.parse("2024-07-20T18:00:00.674+00:00");
-//        Date endTime3 = sdf.parse("2024-07-20T21:00:00.674+00:00");
+////        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+////        Date startTime1 = sdf.parse("2024-07-20T10:00:00.674+00:00");
+////        Date endTime1 = sdf.parse("2024-07-20T13:00:00.674+00:00");
+////        Date startTime2 = sdf.parse("2024-07-20T14:00:00.674+00:00");
+////        Date endTime2 = sdf.parse("2024-07-20T17:00:00.674+00:00");
+////        Date startTime3 = sdf.parse("2024-07-20T18:00:00.674+00:00");
+////        Date endTime3 = sdf.parse("2024-07-20T21:00:00.674+00:00");
 //
 //        Show show = new Show();
 //        show.setMovie(movie);
-//        show.setStartTime(startTime1);
-//        show.setEndTime(endTime1);
+//        show.setStartTime(LocalDateTime.of(2024,8,1,10,30,0));
+//        show.setEndTime(LocalDateTime.of(2024,8,1,12,30,0));
 //        show.setScreen(screen);
 //        show.setFeatures(Arrays.asList(Feature.IMAX));
 //        show.setTheatre(theatre1);
@@ -343,54 +360,54 @@ public class BookMyShowApplication implements CommandLineRunner {
 //
 //        Show show2 = new Show();
 //        show2.setMovie(movie);
-//        show2.setStartTime(startTime2);
-//        show2.setEndTime(endTime2);
+//        show2.setStartTime(LocalDateTime.of(2024,8,1,14,30,0));
+//        show2.setEndTime(LocalDateTime.of(2024,8,1,16,30,0));
 //        show2.setScreen(screen2);
 //        show.setTheatre(theatre1);
 //        show2.setFeatures(Arrays.asList(Feature.IMAX));
 //        showRepository.save(show2);
 //
-//        Show show3 = new Show();
-//        show3.setMovie(movie);
-//        show3.setStartTime(startTime3);
-//        show3.setEndTime(endTime3);
-//        show3.setScreen(screen3);
-//        show3.setTheatre(theatre1);
-//        show3.setFeatures(Arrays.asList(Feature.IMAX));
-//        showRepository.save(show3);
+////        Show show3 = new Show();
+////        show3.setMovie(movie);
+////        show3.setStartTime(startTime3);
+////        show3.setEndTime(endTime3);
+////        show3.setScreen(screen3);
+////        show3.setTheatre(theatre1);
+////        show3.setFeatures(Arrays.asList(Feature.IMAX));
+////        showRepository.save(show3);
 //
 //
-//        Show show4 = new Show();
-//        show4.setMovie(movie);
-//        show4.setStartTime(new Date());
-//        show4.setEndTime(new Date());
-//        show4.setScreen(screen2);
-//        show4.setFeatures(Arrays.asList(Feature.IMAX));
-//        show4.setTheatre(theatre2);
-//        showRepository.save(show4);
+////        Show show4 = new Show();
+////        show4.setMovie(movie);
+////        show4.setStartTime(new Date());
+////        show4.setEndTime(new Date());
+////        show4.setScreen(screen2);
+////        show4.setFeatures(Arrays.asList(Feature.IMAX));
+////        show4.setTheatre(theatre2);
+////        showRepository.save(show4);
 //
-//        Show show5 = new Show();
-//        show5.setMovie(movie);
-//        show5.setStartTime(new Date());
-//        show5.setEndTime(new Date());
-//        show5.setScreen(screen2);
-//        show5.setTheatre(theatre2);
-//        show5.setFeatures(Arrays.asList(Feature.IMAX));
-//        showRepository.save(show5);
+////        Show show5 = new Show();
+////        show5.setMovie(movie);
+////        show5.setStartTime(new Date());
+////        show5.setEndTime(new Date());
+////        show5.setScreen(screen2);
+////        show5.setTheatre(theatre2);
+////        show5.setFeatures(Arrays.asList(Feature.IMAX));
+////        showRepository.save(show5);
 //
-//        Show show6 = new Show();
-//        show6.setMovie(movie);
-//        show6.setStartTime(new Date());
-//        show6.setEndTime(new Date());
-//        show6.setScreen(screen2);
-//        show6.setTheatre(theatre2);
-//        show6.setFeatures(Arrays.asList(Feature.IMAX));
-//        showRepository.save(show6);
+////        Show show6 = new Show();
+////        show6.setMovie(movie);
+////        show6.setStartTime(new Date());
+////        show6.setEndTime(new Date());
+////        show6.setScreen(screen2);
+////        show6.setTheatre(theatre2);
+////        show6.setFeatures(Arrays.asList(Feature.IMAX));
+////        showRepository.save(show6);
 //
 //        Show show7 = new Show();
 //        show7.setMovie(movie3);
-//        show7.setStartTime(new Date());
-//        show7.setEndTime(new Date());
+//        show7.setStartTime(LocalDateTime.of(2024,8,1,10,30,0));
+//        show7.setEndTime(LocalDateTime.of(2024,8,1,12,30,0));
 //        show7.setScreen(screen);
 //        show7.setFeatures(Arrays.asList(Feature.IMAX));
 //        show7.setTheatre(theatre2);
@@ -398,8 +415,8 @@ public class BookMyShowApplication implements CommandLineRunner {
 //
 //        Show show8 = new Show();
 //        show8.setMovie(movie3);
-//        show8.setStartTime(new Date());
-//        show8.setEndTime(new Date());
+//        show8.setStartTime(LocalDateTime.of(2024,8,1,14,30,0));
+//        show8.setEndTime(LocalDateTime.of(2024,8,1,16,30,0));
 //        show8.setScreen(screen);
 //        show8.setTheatre(theatre2);
 //        show8.setFeatures(Arrays.asList(Feature.IMAX));
@@ -407,44 +424,110 @@ public class BookMyShowApplication implements CommandLineRunner {
 //
 //        Show show9 = new Show();
 //        show9.setMovie(movie3);
-//        show9.setStartTime(new Date());
-//        show9.setEndTime(new Date());
+//        show9.setStartTime(LocalDateTime.of(2024,8,1,10,30,0));
+//        show9.setEndTime(LocalDateTime.of(2024,8,1,12,30,0));
 //        show9.setScreen(screen);
 //        show9.setTheatre(theatre2);
 //        show9.setFeatures(Arrays.asList(Feature.IMAX));
 //        showRepository.save(show9);
 //
 //
-//        Show show10 = new Show();
-//        show10.setMovie(movie2);
-//        show10.setStartTime(new Date());
-//        show10.setEndTime(new Date());
-//        show10.setScreen(screen2);
-//        show10.setFeatures(Arrays.asList(Feature.IMAX));
-//        show10.setTheatre(theatre2);
-//        showRepository.save(show10);
+////        Show show10 = new Show();
+////        show10.setMovie(movie2);
+////        show10.setStartTime(new Date());
+////        show10.setEndTime(new Date());
+////        show10.setScreen(screen2);
+////        show10.setFeatures(Arrays.asList(Feature.IMAX));
+////        show10.setTheatre(theatre2);
+////        showRepository.save(show10);
+////
+////        Show show11 = new Show();
+////        show11.setMovie(movie2);
+////        show11.setStartTime(new Date());
+////        show11.setEndTime(new Date());
+////        show11.setScreen(screen2);
+////        show11.setTheatre(theatre2);
+////        show11.setFeatures(Arrays.asList(Feature.IMAX));
+////        showRepository.save(show11);
+////
+////        Show show12 = new Show();
+////        show12.setMovie(movie2);
+////        show12.setStartTime(new Date());
+////        show12.setEndTime(new Date());
+////        show12.setScreen(screen2);
+////        show12.setTheatre(theatre2);
+////        show12.setFeatures(Arrays.asList(Feature.IMAX));
+////        showRepository.save(show12);
+////
+////
+//        ShowSeat showSeat = new ShowSeat();
+//        showSeat.setShow(show);
+//        showSeat.setSeat(seat);
+//        showSeat.setShowSeatStatus(ShowSeatStatus.AVAILABLE);
+//        showSeat.setPrice(100);
+//        showSeatRepository.save(showSeat);
 //
-//        Show show11 = new Show();
-//        show11.setMovie(movie2);
-//        show11.setStartTime(new Date());
-//        show11.setEndTime(new Date());
-//        show11.setScreen(screen2);
-//        show11.setTheatre(theatre2);
-//        show11.setFeatures(Arrays.asList(Feature.IMAX));
-//        showRepository.save(show11);
 //
-//        Show show12 = new Show();
-//        show12.setMovie(movie2);
-//        show12.setStartTime(new Date());
-//        show12.setEndTime(new Date());
-//        show12.setScreen(screen2);
-//        show12.setTheatre(theatre2);
-//        show12.setFeatures(Arrays.asList(Feature.IMAX));
-//        showRepository.save(show12);
+//        ShowSeat showSeat2 = new ShowSeat();
+//        showSeat2.setShow(show);
+//        showSeat2.setSeat(seat2);
+//        showSeat2.setShowSeatStatus(ShowSeatStatus.AVAILABLE);
+//        showSeat2.setPrice(200);
+//        showSeatRepository.save(showSeat2);
+//
+//
+//
+//        ShowSeat showSeat3 = new ShowSeat();
+//        showSeat3.setShow(show);
+//        showSeat3.setSeat(seat3);
+//        showSeat3.setShowSeatStatus(ShowSeatStatus.AVAILABLE);
+//        showSeat3.setPrice(300);
+//        showSeatRepository.save(showSeat3);
+//
+//
+//        ShowSeatType showSeatType = new ShowSeatType();
+//        showSeatType.setShow(show);
+//        showSeatType.setSeatType(SeatType.SILVER);
+//        showSeatType.setPrice(100);
+//        showSeatTypeRepository.save(showSeatType);
+//
+//
+//        ShowSeatType showSeatType2 = new ShowSeatType();
+//        showSeatType2.setShow(show);
+//        showSeatType2.setSeatType(SeatType.GOLD);
+//        showSeatType2.setPrice(200);
+//        showSeatTypeRepository.save(showSeatType2);
+//
+//
+//        ShowSeatType showSeatType3 = new ShowSeatType();
+//        showSeatType3.setShow(show);
+//        showSeatType3.setSeatType(SeatType.GOLD);
+//        showSeatType3.setPrice(300);
+//        showSeatTypeRepository.save(showSeatType2);
+//
+//
+//        User user1 = new User();
+//        user1.setName("Eva");
+//        user1.setEmail("eva@gmail.com");
+//        user1.setPassword("eva@123");
+//        userRepository.save(user1);
+//
+//
+//        User user2 = new User();
+//        user2.setName("Evan");
+//        user2.setEmail("evan@gmail.com");
+//        user2.setPassword("evan@123");
+//        userRepository.save(user2);
 
 
 
-
+            String ipAddress = "122.171.23.77";
+            try {
+                String city = getCityFromIp(ipAddress);
+                System.out.println("City: " + city);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
 
 

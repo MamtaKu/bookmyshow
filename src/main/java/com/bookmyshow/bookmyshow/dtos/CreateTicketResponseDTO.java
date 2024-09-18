@@ -9,5 +9,5 @@ import lombok.Setter;
 public class CreateTicketResponseDTO {
     private Long ticketId;
     private BookingStatus bookingStatus;
-    private double amount;
+    //private double amount;
 }

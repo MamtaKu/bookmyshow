@@ -12,22 +12,26 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
 @Getter
 @Setter
 public class ShowRequestDto {
+    private Long movieId;
+    private Long screenId;
+    private Long theatreId;
 
-    private Movie movie;
+   // private String movie;
 
-    private Date startTime;
+    private LocalDateTime startTime;
 
-    private Date endTime;
+    private LocalDateTime endTime;
 
-    private Screen screen;
+  //  private String screen;
 
     private List<Feature> features;
 
-    private Theatre theatre;
+  //  private String theatre;
 }

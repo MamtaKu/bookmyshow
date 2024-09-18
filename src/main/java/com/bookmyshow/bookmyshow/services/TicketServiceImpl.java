@@ -1,5 +1,7 @@
 package com.bookmyshow.bookmyshow.services;
 
+import com.bookmyshow.bookmyshow.dtos.CreateTicketRequestDTO;
+import com.bookmyshow.bookmyshow.dtos.CreateTicketResponseDTO;
 import com.bookmyshow.bookmyshow.exceptions.ShowSeatNotAvaialbleException;
 import com.bookmyshow.bookmyshow.models.*;
 import com.bookmyshow.bookmyshow.repositories.ShowRepository;
@@ -39,6 +41,7 @@ public class TicketServiceImpl implements TicketService {
         Show show = showRepository.findById(showId).get();
 
 
+        List<ShowSeat> showSeats = new ArrayList<>();
         for(Long showSeatId : showSeatIds){
             //Get the showseat
             ShowSeat showSeat = showSeatRepository.findById(showSeatId).get();
@@ -51,34 +54,22 @@ public class TicketServiceImpl implements TicketService {
             else{
                 throw new ShowSeatNotAvaialbleException("Show seat is not available");
             }
+
             //save the changes in the db
             showSeatRepository.save(showSeat);
-        }
-
-
-        boolean paymentDone = calculatePrice();
-        List<ShowSeat> showSeats = new ArrayList<>();
-
-        double amount = 0;
-
-
-        if(paymentDone){
-            for(Long showSeatId : showSeatIds){
-                ShowSeat showSeat = showSeatRepository.findById(showSeatId).get();
-                showSeat.setShowSeatStatus(ShowSeatStatus.BOOKED);
-                showSeatRepository.save(showSeat);
-                showSeats.add(showSeat);
-                amount = amount + showSeat.getPrice();
-            }
+            showSeats.add(showSeat);
 
         }
+
+
+
+
 
         //return the ticket
         Ticket ticket = new Ticket();
         ticket.setUser(bookedByUser);
         ticket.setShow(show);
         ticket.setShowSeats(showSeats);
-        ticket.setAmount(amount);
         ticket.setBookedAt(LocalDateTime.now());
         ticket.setBookingStatus(BookingStatus.CONFIRMED);
         ticketRepository.save(ticket);
@@ -86,10 +77,11 @@ public class TicketServiceImpl implements TicketService {
         return ticket;
     }
 
-    @Override
-    public Ticket cancelTicket(Long ticketId) {
-        return null;
-    }
+
+
+
+
+
 
     private boolean calculatePrice(){
         return true;
